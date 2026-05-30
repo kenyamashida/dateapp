@@ -21,10 +21,13 @@ function toISO(dateStr, hour) {
 function overlaps(slotStart, slotEnd, busyPeriods) {
   const s = new Date(slotStart).getTime();
   const e = new Date(slotEnd).getTime();
+  const ONE_HOUR = 60 * 60 * 1000; // 1 hora em milissegundos
   return busyPeriods.some(({ start, end }) => {
     const bs = new Date(start).getTime();
     const be = new Date(end).getTime();
-    return s < be && e > bs; // overlap
+    // Adiciona 1 hora de buffer após o término do evento para se arrumar (be + 1h)
+    const virtualEnd = be + ONE_HOUR;
+    return s < virtualEnd && e > bs; // overlap
   });
 }
 
@@ -400,8 +403,11 @@ export default function BookingForm({ onSuccess, onBack }) {
 
       const eventTitle = `💕 Encontro Especial: Ken & ${GUEST_NAME || 'Parceira'} - ${formattedActivity.split(' ')[0]}`;
 
-      // Google Calendar Template URL
-      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(descriptionText)}&ctz=America/Sao_Paulo`;
+      // Google Calendar Template URL (adiciona o e-mail do Ken como convidado automático)
+      let calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(descriptionText)}&ctz=America/Sao_Paulo`;
+      if (OWNER_EMAIL && !OWNER_EMAIL.includes('seu-email')) {
+        calendarUrl += `&add=${encodeURIComponent(OWNER_EMAIL)}`;
+      }
 
       // WhatsApp Message URL
       let whatsappMessage = `Oi! Aqui é a ${GUEST_NAME || 'sua parceira'}. Aceitei seu convite para o nosso encontro! 🥰\n\n`;
@@ -1047,7 +1053,7 @@ export default function BookingForm({ onSuccess, onBack }) {
                       disabled={!slot.available}
                       onClick={() => setSelectedSlot(slot)}
                     >
-                      {slot.label}
+                      <span>{selectedSlot?.hour === slot.hour ? '💖' : '⏰'} {slot.label}</span>
                       {!slot.available && <span className="slot-busy-tag">ocupado</span>}
                     </button>
                   ))}
