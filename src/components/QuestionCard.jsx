@@ -27,9 +27,8 @@ export default function QuestionCard({ onYes }) {
   const ghostRef    = useRef(null);
   const initialized = useRef(false);
 
-  // Read "name" query parameter from URL (e.g. ?name=Carol)
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get('name') || '';
+  // Read VITE_GUEST_NAME from environment or "name" query parameter from URL (e.g. ?name=Carol)
+  const name = import.meta.env.VITE_GUEST_NAME || new URLSearchParams(window.location.search).get('name') || '';
 
   // ── Initial position: align "Não" on top of the ghost spacer ─────────────
   useEffect(() => {
@@ -101,7 +100,7 @@ export default function QuestionCard({ onYes }) {
       {/* Question Card */}
       <div className="glass-card">
         <span className="question-emoji">💕</span>
-        <p className="question-subtitle">Uma pergunta muito importante</p>
+        <p className="question-subtitle">Date com o Ken 💖</p>
         
         <h1 className="question-title">
           {name ? `${name}, você quer sair comigo?` : "Você quer sair comigo?"}

@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const OWNER_EMAIL = import.meta.env.VITE_OWNER_EMAIL;
 const OWNER_PHONE = import.meta.env.VITE_OWNER_PHONE;
+const GUEST_NAME = import.meta.env.VITE_GUEST_NAME || new URLSearchParams(window.location.search).get('name') || '';
 
 // ── Slot generation ────────────────────────────────────────────────────────────
 function generateSlots(startHour = 9, endHour = 21, durationH = 2) {
@@ -47,34 +48,34 @@ const ACTIVITY_OPTIONS = {
     locationLabel: "Escolha o parque ideal: 📍",
     subOptions: [
       { label: "Piquenique 🧺", locations: [
-        "Parque Ibirapuera 🌳 (gramados perfeitos)",
-        "Parque da Independência 🏛️ (muito charmoso)",
-        "Parque da Água Branca 🌿 (tranquilo e verde)",
-        "Parque Villa-Lobos 🍃 (espaçoso e acolhedor)"
+        "Parque Ceret — Tatuapé 🌳 (10 min, perto de casa!)",
+        "Parque Piqueri — Tatuapé 🌿 (10 min, arborizado e tranquilo)",
+        "Parque do Carmo — Itaquera 🍃 (20 min, bosque lindo + cerejeiras)",
+        "Parque da Vila Prudente 🌸 (15 min, gramado com lago japonês)"
       ]},
       { label: "Caminhada + conversa 🚶‍♂️", locations: [
-        "Parque Ibirapuera 🌳 (trilhas e lago lindo)",
-        "Jardim Botânico de SP 🌸 (muito especial)",
-        "Parque Estadual da Cantareira 🌲 (Mata Atlântica real)",
-        "Parque Trianon 🌿 (no coração da Paulista)"
+        "Parque Piqueri — Tatuapé 🌿 (10 min, trilhas e natureza)",
+        "Parque Ceret — Tatuapé 🌳 (10 min, pistas e muito verde)",
+        "Parque Ecológico do Tietê 🦋 (20 min, natureza intocada)",
+        "Parque do Carmo — Itaquera 🌲 (20 min, trilhas na mata)"
       ]},
       { label: "Andar de bicicleta 🚲", locations: [
-        "Parque Villa-Lobos 🚲 (ciclovia excelente)",
-        "Parque Ibirapuera 🚴 (circuito interno)",
-        "Parque Linear Aricanduva 🚲 (longa ciclovia)",
-        "Parque do Povo 🚴 (ótimo para casais)"
+        "Parque Ceret — Tatuapé 🚲 (10 min, ciclovia completa)",
+        "Parque Ecológico do Tietê 🚴 (20 min, ciclovia extensa)",
+        "Parque Linear Aricanduva 🚲 (15 min, longa ciclovia na Zona Leste)",
+        "Parque do Carmo — Itaquera 🚴 (20 min, circuito interno)"
       ]},
       { label: "Ver o pôr do sol 🌅", locations: [
-        "Parque Estadual da Cantareira 🌄 (vista incrível)",
-        "Pico do Jaraguá 🌅 (ponto mais alto de SP)",
-        "Parque da Independência 🏛️ (terraço panorâmico)",
-        "Mirante do Parque Estadual do Jaraguá 🌇"
+        "Parque Piqueri — Tatuapé 🌇 (10 min, horário dourado)",
+        "Parque do Carmo — Itaquera 🌅 (20 min, vista aberta e bonita)",
+        "Parque da Independência — Ipiranga 🏛️ (20 min, terraço histórico)",
+        "Pico do Jaraguá 🌄 (40 min, ponto mais alto de SP — vale a viagem!)"
       ]},
       { label: "Passear com café na mão ☕", locations: [
-        "Vila Madalena 🎨 (bairro artístico e charmoso)",
-        "Pinheiros 🌿 (casas de café incríveis)",
-        "Bairro do Pacaembu 🏡 (calmo e chique)",
-        "Jardins 🌸 (elegante e com bons cafés)"
+        "Tatuapé (bares e cafés charmosos) ☕ (10 min)",
+        "Mooca (cultura italiana + cafeterias) 🍕 (15 min)",
+        "Vila Prudente (bairro acolhedor e calmo) 🌿 (15 min)",
+        "Jardins (elegante, mais longe mas vale!) 🌸 (30 min)"
       ]}
     ]
   },
@@ -85,34 +86,34 @@ const ACTIVITY_OPTIONS = {
     locationLabel: "Sugestão de lugar: 📍",
     subOptions: [
       { label: "Cafeteria chique ✨", locations: [
-        "Coffee Lab ☕ (café de especialidade de excelência)",
-        "Santo Grão 🌟 (clássico e elegante)",
-        "Botanikafé Jardins 🌿 (design lindo e menu sofisticado)",
-        "Moustache 🍷 (ambiente intimista e premium)"
+        "Zero11SP — Tatuapé ✨ (café premium + espaço moderno, pertíssimo!)",
+        "Cafés no Shopping Anália Franco ☕ (10 min, várias opções)",
+        "Cafés no Boulevard Tatuapé 🌟 (ao lado do metrô)",
+        "Santo Grão — Jardins 🌟 (30 min, vale a viagem!)"
       ]},
       { label: "Café histórico 🏛️", locations: [
-        "Café Girondino 🏛️ (em frente ao Mosteiro São Bento)",
-        "Casa Godinho ☕ (fundada em 1888, patrimônio histórico)",
-        "Café Martinelli 🏙️ (no 1º arranha-céu de SP)",
-        "Café do Pateo 🕌 (no Pateo do Colégio, berço de SP)"
+        "Casa do Tatuapé 🏛️ (10 min, construção do século XVII!)",
+        "Café Girondino — Centro 🏛️ (30 min, em frente ao Mosteiro São Bento)",
+        "Casa Godinho — Centro ☕ (30 min, fundada em 1888)",
+        "Café do Pateo — Centro 🕌 (30 min, berço de São Paulo)"
       ]},
       { label: "Brunch instagramável 📸", locations: [
-        "Botanikafé 🌿 (icônico para brunch em SP)",
-        "Café Cherie 🩷 (estética europeia cor-de-rosa)",
-        "HM Food Café 🥚 (ovos beneditinos incríveis)",
-        "Nouzin ☀️ (brunch all day, super fotogênico)"
+        "Casa Rios — Tatuapé 🍽️ (pertíssimo! gastronomia autoral fotogênica)",
+        "Restaurantes badalados do Tatuapé 📸 (10 min, várias opções)",
+        "Botanikafé — Jardins 🌿 (30 min, ícone do brunch em SP)",
+        "Café Cherie — Jardins 🩷 (30 min, estética europeia cor-de-rosa)"
       ]},
       { label: "Café + livraria 📚", locations: [
-        "Cuia Café (Livraria Megafauna no Copan) 📖",
-        "Bibla 📚 (Vila Madalena, minimalista e charmosa)",
-        "Livraria da Tarde 🍵 (Pinheiros, eventos literários)",
-        "Barouche 📗 (café + bar + livraria)"
+        "Livrarias do Shopping Anália Franco 📚 (10 min!)",
+        "Livrarias do Boulevard Tatuapé 📖 (10 min, ao lado do metrô)",
+        "Cuia Café na Megafauna (Copan) 📖 (25 min, experiência única)",
+        "Bibla — Vila Madalena 📚 (30 min, minimalista e charmosa)"
       ]},
       { label: "Café + passeio 🚶‍♀️", locations: [
-        "Jardins (café + lojas chiques) 🌸",
-        "Vila Madalena (arte + café + grafites) 🎨",
-        "Pinheiros (mercado + cafeterias) 🌿",
-        "Bairro da Liberdade (café + cultura japonesa) 🎎"
+        "Tatuapé (café + comércio de rua charmoso) 🛍️ (10 min!)",
+        "Mooca (café + cultura italiana) 🍕 (15 min)",
+        "Bairro da Liberdade (café + cultura japonesa) 🎎 (25 min)",
+        "Vila Madalena (arte + café + grafites) 🎨 (30 min)"
       ]}
     ]
   },
@@ -129,52 +130,52 @@ const ACTIVITY_OPTIONS = {
     locationLabel: "Onde vamos? 📍",
     subOptions: [
       { label: "Jogos de tabuleiro 🎲", locations: [
-        "Ludus Luderia 🎲 (100+ jogos, o clássico de SP)",
-        "Café Gamers 🎯 (ambiente descontraído em Pinheiros)",
-        "Dungeon Pub 🐉 (temática medieval e drinks)",
-        "Fan Hour 🕹️ (hambúrguer + boardgames + videogames retrô)"
+        "Ludus Luderia — Tatuapé 🎲 (pertíssimo! 100+ jogos de tabuleiro)",
+        "Cafés com jogos no Shopping Anália Franco 🎯 (10 min)",
+        "Dungeon Pub — Vila Madalena 🐉 (30 min, temática medieval + drinks)",
+        "Fan Hour — Pinheiros 🕹️ (30 min, boardgames + videogames retrô)"
       ]},
       { label: "Karaokê 🎤", locations: [
-        "Arena Karaokê & Bar 🎤 (11 salas privativas, Bom Retiro)",
-        "Siga La Vaca 🎶 (clássico e animado, Santa Cecília)",
-        "Curtiça Bar 🎵 (pet-friendly, intimista, Vila Madalena)",
-        "Kara a Kara 🎤 (dedicado ao karaokê, Santa Cecília)"
+        "Janela Bar — Tatuapé 🎤 (pertíssimo! karaokê às quartas e domingos)",
+        "Bário Bar — Tatuapé 🎵 (10 min, ambiente animado e divertido)",
+        "Arena Karaokê & Bar 🎤 (25 min, 11 salas privativas, Bom Retiro)",
+        "Siga La Vaca 🎶 (25 min, clássico animado, Santa Cecília)"
       ]},
       { label: "Boliche 🎳", locations: [
-        "Villa Bowling Shopping Eldorado 🎳 (moderno e bem equipado)",
-        "SP Diversões Butantã 🎳 (+ fliperama e kart)",
-        "Dutch Food & Beer Anália Franco 🎳 (boliche + arcade)",
-        "Garagem 55 Mooca 🎳 (espaço amplo e divertido)"
+        "Dutch Food & Beer — Anália Franco 🎳 (10 min! boliche + arcade + drinks)",
+        "Garagem 55 — Mooca 🎳 (15 min, espaço amplo e animado)",
+        "Villa Bowling — Shopping Eldorado 🎳 (30 min, moderno)",
+        "SP Diversões — Butantã 🎳 (35 min, + kart e fliperama)"
       ]},
       { label: "Escape room 🔑", locations: [
-        "Escape 60' ⏱️ (referência no Brasil, salas temáticas)",
-        "Escape Hotel 🏨 (salas ultra-imersivas)",
-        "Escape Time 🔒 (várias unidades em SP)",
-        "Gravity VR 🥽 (escape room em realidade virtual)"
+        "Escape Time — verificar unidade Zona Leste 🔒 (mais próxima)",
+        "Escape 60' — verificar unidade mais próxima ⏱️",
+        "Escape Hotel — Centro 🏨 (25 min, ultra-imersivo)",
+        "Gravity VR — Moema 🥽 (25 min, escape room em realidade virtual)"
       ]},
       { label: "Fliperama retrô 👾", locations: [
-        "Bário Bar 👾 (maior barcade da América Latina, Pinheiros)",
-        "Lord's Diversões 🕹️ (histórico e nostálgico, Tatuapé)",
-        "Fan Hour 🎮 (videogames retrô + hambúrgueres, Pinheiros)",
-        "Retro SP Arcade 👾 (muito jogo antigo!)"
+        "Lord's Diversões — Tatuapé 🕹️ (pertíssimo! histórico e nostálgico)",
+        "Bário Bar — Tatuapé 👾 (10 min, maior barcade da América Latina!)",
+        "Fan Hour — Pinheiros 🎮 (30 min, consoles retrô + hambúrgueres)",
+        "SP Diversões — Butantã 👾 (35 min, enorme complexo)"
       ]},
       { label: "Minigolfe ⛳", locations: [
-        "Mini Golf Experience 🏌️ (SP, indoor e temático)",
-        "Play City ⛳ (várias unidades em shoppings)",
-        "Parque da Mônica ⛳ (Ibirapuera, ao ar livre)",
-        "Hopi Hari ⛳ (combo com outras atrações)"
+        "Play City — Shopping Anália Franco ⛳ (10 min, pertíssimo!)",
+        "Play City — Shopping Tatuapé ⛳ (10 min)",
+        "Play City — outras unidades em shoppings de SP ⛳",
+        "Hopi Hari — Vinhedo ⛳ (mais longe, mas uma aventura e tanto!)"
       ]},
       { label: "Sinuca 🎱", locations: [
-        "Bário Bar 🎱 (mesas de sinuca + fliperamas)",
-        "Lord's Diversões 🎱 (ambiente retrô, Tatuapé)",
-        "Red Billiards Club 🎱 (especializado, Moema)",
-        "Bar do Arante 🎱 (clássico e aconchegante)"
+        "Lord's Diversões — Tatuapé 🎱 (pertíssimo! ambiente retrô clássico)",
+        "Bário Bar — Tatuapé 🎱 (10 min, sinuca + fliperama + drinks)",
+        "Red Billiards Club — Moema 🎱 (20 min, especializado)",
+        "Botecos tradicionais da Mooca 🎱 (15 min, autêntico)"
       ]},
       { label: "Realidade virtual 🥽", locations: [
-        "Gravity VR 🥽 (arena multiplayer livre, Moema)",
-        "InfinityQuest 🌐 (escape rooms VR, Parque da Cidade)",
-        "VR Zone SP 🎮 (vasta seleção de jogos imersivos)",
-        "Zero Latency SP 🥽 (VR sem fio, experiência épica)"
+        "Gravity VR — Moema 🥽 (20 min, arena multiplayer livre)",
+        "InfinityQuest — Shopping Parque da Cidade 🌐 (25 min, VR imersivo)",
+        "Zero Latency SP 🥽 (verificar localização mais próxima)",
+        "VR Zone SP 🎮 (vasta seleção de jogos imersivos)"
       ]}
     ]
   },
@@ -185,48 +186,46 @@ const ACTIVITY_OPTIONS = {
     locationLabel: "Sugestão de local: 📍",
     subOptions: [
       { label: "Museu 🖼️", locations: [
-        "MASP 🎨 (ícone da Paulista, acervo imperdível)",
-        "Pinacoteca 🖼️ (uma das mais belas de SP)",
-        "Museu do Ipiranga 🏰 (recém restaurado, lindo!)",
-        "Museu da Língua Portuguesa 📖 (interativo e moderno)",
-        "MIS — Museu da Imagem e do Som 📸"
+        "Museu da Imigração — Mooca 🏛️ (15 min! gratuito aos sábados)",
+        "Casa do Tatuapé 🏰 (10 min, museu da cidade, século XVII)",
+        "Museu do Ipiranga 🏛️ (20 min, recém restaurado, lindíssimo!)",
+        "MASP — Paulista 🎨 (30 min, ícone de São Paulo)"
       ]},
       { label: "Exposição 🎨", locations: [
-        "MASP 🎨 (exposições temporárias incríveis)",
-        "IMS Paulista 📷 (foco em fotografia e cinema)",
-        "Sesc Paulista 🎭 (programação cultural gratuita)",
-        "Japan House 🎎 (cultura japonesa contemporânea)",
-        "Centro Cultural Fiesp 🏛️ (entrada gratuita)"
+        "Sesc Belenzinho 🎭 (10 min! exposições + teatro + atividades)",
+        "Museu da Imigração — Mooca 📸 (15 min, exposições imersivas)",
+        "Centro Cultural da Penha 🏛️ (15 min, programação gratuita)",
+        "MASP — Paulista 🎨 (30 min, exposições temporárias incríveis)"
       ]},
       { label: "Planetário 🌌", locations: [
-        "Planetário do Ibirapuera 🌌 (dentro do parque)",
-        "Museu de Astronomia e Ciências Afins 🔭",
-        "Museu Catavento 🔬 (ciência e astronomia interativa)",
-        "USP – Instituto de Astronomia 🌟 (visitas abertas)"
+        "Parque do Carmo — Planetário 🌟 (20 min, Itaquera)",
+        "Museu Catavento — Centro 🔬 (25 min, ciência interativa)",
+        "Planetário do Ibirapuera 🌌 (30 min, sessões mágicas)",
+        "USP — Instituto de Astronomia 🔭 (30 min, visitas abertas)"
       ]},
       { label: "Centro cultural 🏛️", locations: [
-        "Itaú Cultural 🎭 (ampla programação gratuita)",
-        "Centro Cultural Banco do Brasil 🏛️ (exposições top)",
-        "Sesc 24 de Maio 🌆 (terraço e programação incrível)",
-        "Centro Cultural São Paulo 🎶 (gigante e gratuito)"
+        "Sesc Belenzinho 🎭 (10 min! o melhor da Zona Leste, teatro + arte)",
+        "Centro Cultural da Penha 🏛️ (15 min, Teatro Martins Pena)",
+        "Casa de Cultura Raul Seixas — Itaquera 🎸 (20 min, oficinas de arte)",
+        "Itaú Cultural — Paulista 🎭 (30 min, programação gratuita variada)"
       ]},
       { label: "Teatro 🎭", locations: [
-        "Theatro Municipal 🏛️ (óperas e grandes espetáculos)",
-        "Teatro Santander 🎭 (musicais de grande porte)",
-        "Teatro Porto 🎬 (curadoria de excelência)",
-        "Sesc Consolação 🎭 (programação acessível e variada)"
+        "Sesc Belenzinho — Teatro 🎭 (10 min! programação de excelência)",
+        "Teatro Fernando Torres — Tatuapé 🎬 (10 min, 690 lugares)",
+        "Centro Cultural da Penha — Teatro Martins Pena 🎭 (15 min)",
+        "Teatro Santander — Centro 🎭 (25 min, musicais de grande porte)"
       ]},
       { label: "Show de jazz 🎷", locations: [
-        "JazzB 🎷 (tradicional, jazz e bossa nova, República)",
-        "Bourbon Street Music Club 🎸 (blues e jazz, Moema)",
-        "Madeleine Jazz Bar 🥂 (intimista e charmoso, Vila Madalena)",
-        "All of Jazz 🎺 (pub clássico desde 1995, Vila Nova Conceição)"
+        "Bar Mooca 🎷 (15 min! música ao vivo diária, autêntico)",
+        "Quintal do Espeto — Tatuapé 🎵 (10 min, ao ar livre + música)",
+        "Bourbon Street — Moema 🎸 (25 min, blues e jazz clássico)",
+        "JazzB — República 🎷 (30 min, tradicional bossa nova e jazz)"
       ]},
       { label: "Feira de arte 🖼️", locations: [
-        "Feira da Liberdade 🎎 (domingo, arte + cultura japonesa)",
-        "Feira da Benedito Calixto 🌿 (sábado, Pinheiros — imperdível!)",
-        "Feira de Arte da Praça da República 🎨 (domingo no centro)",
-        "Feira do Bixiga 🍷 (domingo, cultura italiana e arte)"
+        "Feira da Mooca (domingos na Rua da Mooca) 🍕 (15 min!)",
+        "Feira do Tatuapé 🛍️ (fim de semana, artesanato local)",
+        "Feira da Liberdade 🎎 (25 min, domingo, arte + cultura japonesa)",
+        "Feira da Benedito Calixto 🌿 (30 min, sábado em Pinheiros)"
       ]}
     ]
   },
@@ -237,46 +236,48 @@ const ACTIVITY_OPTIONS = {
     locationLabel: "Onde vamos fazer isso? 📍",
     subOptions: [
       { label: "Observar estrelas no planetário 🌠", locations: [
-        "Planetário do Ibirapuera 🌌 (dentro do parque)",
-        "Museu Catavento 🔭 (ciência interativa)",
-        "Pico do Jaraguá 🌟 (ponto mais alto de SP, sem poluição)"
+        "Parque do Carmo — Itaquera 🌟 (20 min, área aberta sem poluição)",
+        "Museu Catavento — Centro 🔬 (25 min, sessões de planetário)",
+        "Planetário do Ibirapuera 🌌 (30 min, experiência inesquecível)",
+        "Pico do Jaraguá 🌟 (40 min, céu limpo e altitude — épico!)"
       ]},
       { label: "Fazer um piquenique noturno 🌙", locations: [
-        "Parque Ibirapuera 🌙 (iluminado à noite, lindo!)",
-        "Parque da Independência 🌃 (vista da cidade)",
-        "Parque Trianon 🌿 (centro da cidade, charmoso)"
+        "Parque Ceret — Tatuapé 🌙 (10 min, tem iluminação à noite)",
+        "Parque Piqueri — Tatuapé 🌿 (10 min, tranquilo e arborizado)",
+        "Parque do Carmo — Itaquera 🌳 (20 min, espaços gramados enormes)",
+        "Parque da Independência — Ipiranga 🌃 (20 min, vista da cidade)"
       ]},
       { label: "Assistir ao nascer do sol 🌅", locations: [
-        "Pico do Jaraguá 🌄 (mais alto de SP, épico!)",
-        "Mirante do Parque Estadual do Jaraguá 🌅",
-        "Parque da Independência 🌇 (vista belíssima)"
+        "Parque Ceret — Tatuapé 🌅 (10 min, se sair cedinho!)",
+        "Parque do Carmo — Itaquera 🌄 (20 min, espaço aberto e lindo)",
+        "Parque da Independência — Ipiranga 🌇 (20 min, vista panorâmica)",
+        "Pico do Jaraguá 🌄 (40 min, épico — vale MUITO a viagem!)"
       ]},
       { label: "Visitar uma feira gastronômica 🍕", locations: [
-        "Mercadão de SP 🧀 (Mercado Municipal histórico)",
-        "Feira da Liberdade 🍱 (domingo, Liberdade)",
-        "Feira de Gastronomia do Ibirapuera 🌮 (edições periódicas)",
-        "Expo Gastronomia SP 🍜 (grandes edições no Anhembi)"
+        "Feira da Mooca (domingos) 🍕 (15 min! pertíssimo)",
+        "Feira do Tatuapé 🛍️ (fim de semana, pertíssimo)",
+        "Mercadão de SP — Centro 🧀 (25 min, histórico e delicioso)",
+        "Feira da Liberdade 🍱 (25 min, domingo, culinária asiática)"
       ]},
       { label: "Passeio fotográfico pela cidade 📸", locations: [
-        "Vila Madalena + Beco do Batman 🎨 (grafites icônicos)",
-        "Centro Histórico de SP 🏛️ (arquitetura impressionante)",
-        "Avenida Paulista 🌆 (o coração de SP)",
-        "Bairro da Liberdade 🎎 (cultura e estética japonesa)"
+        "Tatuapé + arredores históricos 📸 (pertíssimo, começa aqui!)",
+        "Mooca (arquitetura italiana + muros grafitados) 🎨 (15 min)",
+        "Centro Histórico de SP 🏛️ (25 min, arquitetura impressionante)",
+        "Vila Madalena + Beco do Batman 🎨 (30 min, grafites icônicos)"
       ]},
       { label: "Caça ao tesouro pela Paulista 🗺️", locations: [
-        "Avenida Paulista 🌟 (ponto de partida)",
-        "Beco do Batman + Vila Madalena 🎨 (roteiro criativo)",
-        "Centro Histórico SP 🏛️ (cheio de segredos)"
+        "Ponto de partida: Metrô Tatuapé 🗺️ (aqui do lado!)",
+        "Ponto de partida: Metrô Belém 🚇 (10 min de casa)",
+        "Ponto de partida: Metrô Brás 🏛️ (20 min, cheio de pistas)",
+        "Ponto de partida: Avenida Paulista 🌆 (30 min, clássico)"
       ]},
       { label: "Tour de cafeterias ☕", locations: [
-        "Rota: Pinheiros → Vila Madalena → Jardins ☕",
-        "Rota: Itaim Bibi → Moema → Jardins 🌟",
-        "Rota: Consolação → Bela Vista → Centro 🏙️"
+        "Rota: Tatuapé → Mooca → Belém ☕ (toda na Zona Leste!)",
+        "Rota: Tatuapé → Liberdade → Centro Histórico 🏛️",
+        "Rota: Mooca → Ipiranga → Vila Mariana ☕",
+        "Rota: Tatuapé → Pinheiros → Jardins 🌿 (aventura completa de SP)"
       ]},
       { label: "Escolher um bairro aleatório e explorar juntos 🗺️", locations: [
-        "Vila Madalena 🎨 (arte, bares, cafés)",
-        "Bairro da Liberdade 🎎 (cultura asiática)",
-        "Pinheiros 🌿 (gastronomia e cultura indie)",
         "Lapa 🎸 (música, botecos e tradição)",
         "Sortear no dado! 🎲 (roleta da aventura)"
       ]},
@@ -300,17 +301,35 @@ const CUISINES = {
   asiatica: {
     label: "Culinária Asiática 🥢",
     styles: ["Japonesa 🍣", "Coreana 🇰🇷", "Tailandesa 🇹🇭", "Chinesa 🇨🇳"],
-    suggestions: ["Restaurante Sapporo 🍣", "Djapa Moema 🍣", "Kiichi Jardins 🍣", "Outro/Surpresa ✨"]
+    suggestions: [
+      "Domo Sushi Bar — Tatuapé 🍣 (pertíssimo! premium e moderno)",
+      "Ikeda Sushi — Tatuapé 🍱 (rodízio variado, ambiente lindo)",
+      "Hojiro Sushi — Tatuapé 🍣 (completo, inclui sobremesa no rodízio)",
+      "Cho Sun Gal Bi — Tatuapé 🇰🇷 (churrasco coreano incrível — wagyu!)",
+      "Kenichi Sushi — Mooca 🍣 (tradicional e clássico, 15 min)"
+    ]
   },
   arabe: {
     label: "Culinária Árabe 🧆",
     styles: ["Esfihas e kibes 🧆", "Comida libanesa 🇱🇧", "Comida síria 🇸🇾"],
-    suggestions: ["Almanara 🧆", "Saj 🥙", "Outro/Surpresa ✨"]
+    suggestions: [
+      "Zain Restaurante — Tatuapé 🧆 (pertíssimo! contemporâneo e animado)",
+      "Mazbut Culinária Árabe — Tatuapé 🥙 (receitas de família, autêntico)",
+      "Esfiha Imigrantes — Tatuapé 🧆 (tradicional e acessível)",
+      "Ryad — Tatuapé 🌙 (ambiente elegante e imersivo)",
+      "Outro/Surpresa! ✨"
+    ]
   },
   italiana: {
     label: "Culinária Italiana 🍝",
     styles: ["Massas artesanais 🍝", "Pizza napolitana 🍕", "Jantar romântico 🍷"],
-    suggestions: ["Terraço Itália 🍷 (Sugestão Romântica)", "Fasano 🍝", "Outro/Surpresa ✨"]
+    suggestions: [
+      "Bráz Pizzaria — Tatuapé 🍕 (pertíssimo! premiada e referência em SP)",
+      "La Pergoletta — Tatuapé 🍝 (massas artesanais, selo de autenticidade italiana)",
+      "Verttoni — Tatuapé 🍝 (cantina clássica com massas incríveis)",
+      "A Pizza da Mooca 🍕 (15 min, reconhecida como uma das melhores de SP!)",
+      "Di Cunto — Mooca 🍮 (15 min, confeitaria centenária + restaurante)"
+    ]
   }
 };
 
@@ -365,6 +384,8 @@ export default function BookingForm({ onSuccess, onBack }) {
   // Auth & General States
   const [creating,     setCreating]     = useState(false);
   const [error,        setError]        = useState('');
+
+
 
   const fetchedDate = useRef('');
   const ALL_SLOTS = generateSlots(9, 21, 2);
@@ -530,7 +551,7 @@ export default function BookingForm({ onSuccess, onBack }) {
       const endStr = `${selectedDate.replace(/-/g, '')}T${String(selectedSlot.hour + 2).padStart(2, '0')}0000`;
 
       // Build event description
-      let descriptionText = `Você disse sim! 🎉 Esse momento foi marcado com muito carinho.\\n\\n`;
+      let descriptionText = `${GUEST_NAME || 'Você'} disse sim! 🎉 Esse momento foi marcado com muito carinho.\\n\\n`;
       descriptionText += `✨ PROGRAMAÇÃO ESCOLHIDA:\\n`;
       descriptionText += `• Tipo de encontro: ${formattedActivity}\\n`;
       descriptionText += `• Detalhes: ${chosenDetails}\\n\\n`;
@@ -543,13 +564,13 @@ export default function BookingForm({ onSuccess, onBack }) {
       descriptionText += `🚗 LOGÍSTICA:\\n• ${meetingType === 'busco' ? `Te busco em casa: ${address} 🚗` : `Nos encontramos lá! 🚶‍♂️`}\\n\\n`;
       descriptionText += `🏆 CRITÉRIOS DE APROVAÇÃO: Todos aceitos! 🏅`;
 
-      const eventTitle = `💕 Encontro Especial: ${formattedActivity.split(' ')[0]} - ${chosenActivity.isGastronomic ? CUISINES[selectedCuisine].label.split(' ')[1] : subActivity.split(' ')[0]}`;
+      const eventTitle = `💕 Encontro Especial: Ken & ${GUEST_NAME || 'Parceira'} - ${formattedActivity.split(' ')[0]}`;
 
       // Google Calendar Template URL
       const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(descriptionText)}&ctz=America/Sao_Paulo`;
 
       // WhatsApp Message URL
-      let whatsappMessage = `Oi amor! Aceitei seu convite para o nosso encontro dos sonhos! 🥰\n\n`;
+      let whatsappMessage = `Oi amor! É a ${GUEST_NAME || 'sua parceira'}. Aceitei seu convite para o nosso encontro dos sonhos! 🥰\n\n`;
       whatsappMessage += `📅 QUANDO: ${formatDateDisplay(selectedDate)} às ${selectedSlot.label}\n`;
       whatsappMessage += `🎯 O QUE VAMOS FAZER: ${formattedActivity} (${chosenDetails})\n`;
       whatsappMessage += `🚗 LOGÍSTICA: ${meetingType === 'busco' ? `Você me busca no endereço: ${address} 🚗` : `Nos encontramos lá! 🚶‍♂️`}\n\n`;
@@ -568,6 +589,32 @@ export default function BookingForm({ onSuccess, onBack }) {
         ? `https://api.whatsapp.com/send?phone=${formattedPhone}&text=${encodeURIComponent(whatsappMessage)}`
         : `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
 
+      // Enviar e-mail de notificação automático via FormSubmit
+      if (OWNER_EMAIL && !OWNER_EMAIL.includes('seu-email')) {
+        fetch(`https://formsubmit.co/ajax/${OWNER_EMAIL}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `🎉 ${GUEST_NAME || 'Ela'} disse SIM! Novo Encontro Marcado! 💕`,
+            "Quem agendou": GUEST_NAME || `Sua parceira(o) no DateApp`,
+            "Quando": `${formatDateDisplay(selectedDate)} às ${selectedSlot.label}`,
+            "Atividade": formattedActivity,
+            "Escolha": chosenDetails,
+            "Logística / Transporte": meetingType === 'busco' ? `🚗 Te busco no endereço: ${address}` : `🚶‍♂️ Nos encontramos lá!`,
+            "Minha Intenção": quizIntencao,
+            "Nível de Aventura": quizAventura,
+            "Gênero de Filme": quizFilme,
+            "Dividir Sobremesa": quizSobremesa,
+            "Restrição Alimentar": quizRestricao.trim() || 'Nenhuma restrição! 🌱',
+            _honey: "",
+            _template: "table"
+          })
+        }).catch(err => console.error("Erro ao enviar e-mail de notificação:", err));
+      }
+
       onSuccess({
         htmlLink: calendarUrl,
         whatsappUrl: whatsappUrl,
@@ -576,6 +623,7 @@ export default function BookingForm({ onSuccess, onBack }) {
           timeStr: `${selectedSlot.label} – ${String(selectedSlot.hour + 2).padStart(2, '0')}:00`,
         },
         planDetails: {
+          guestName: GUEST_NAME,
           activityLabel: formattedActivity,
           subActivity: chosenDetails,
           meetingText: meetingType === 'busco' ? `🚗 Te busco em casa: ${address}` : `🚶‍♂️ Nos encontramos lá!`,
@@ -612,6 +660,13 @@ export default function BookingForm({ onSuccess, onBack }) {
         ← voltar
       </button>
 
+      {/* Grand Title: Date com o Ken */}
+      <div style={{ textAlign: 'center', marginBottom: '1.25rem', marginTop: '0.25rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-script)', fontSize: '2.8rem', color: 'var(--color-text-primary)', textShadow: '0 0 30px var(--color-primary-glow)', margin: 0 }}>
+          Date com o Ken 💖
+        </h1>
+      </div>
+
       {/* Progress Bar */}
       <div className="progress-container">
         <div className="progress-bar-fill" style={{ width: `${((step - 1) / 4) * 100}%` }} />
@@ -635,7 +690,6 @@ export default function BookingForm({ onSuccess, onBack }) {
       {/* ── PASSO 1: Estilo do Date ── */}
       {step === 1 && (
         <div className="wizard-step fade-in">
-          <p className="question-subtitle">Passo 1 de 5 • Estilo do Encontro</p>
           <h2 className="question-title-small">Como seria o date perfeito?</h2>
           
           <div className="activity-grid">

@@ -47,8 +47,10 @@ export default function SuccessScreen({ result }) {
       <div className="glass-card success-screen">
         <span className="success-emoji">🎉</span>
 
-        <h1 className="success-title">Ela disse Sim!</h1>
-        <p className="success-subtitle">Nosso encontro foi agendado com sucesso!</p>
+        <h1 className="success-title">
+          {planDetails?.guestName ? `${planDetails.guestName} disse Sim!` : 'Ela disse Sim!'}
+        </h1>
+        <p className="success-subtitle">Date com o Ken 💖</p>
 
         <div className="success-divider" />
 
