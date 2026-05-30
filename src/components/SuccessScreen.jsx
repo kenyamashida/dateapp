@@ -23,6 +23,47 @@ function createConfetti(container) {
   }
 }
 
+function getPersonalizedPhrase(answers) {
+  const phrases = [];
+
+  if (answers) {
+    if (answers.quizAventura === 'Seguro') {
+      phrases.push("Aparentemente você gosta de dates tranquilos e sem sustos. Perfeito para conversar! ☕");
+      phrases.push("Você prefere a segurança de um bom planejamento. Zero chances de terminarmos perdidos! 🗺️");
+    } else if (answers.quizAventura === 'Vamos improvisar') {
+      phrases.push("Você parece o tipo de pessoa que adora improvisar e deixar espaço para a magia do momento! ✨");
+      phrases.push("Aventura moderada detectada! Prepare-se para boas risadas e momentos espontâneos. 🧭");
+    } else if (answers.quizAventura === 'Se terminarmos numa feira medieval, faz parte') {
+      phrases.push("Nível de aventura lendário! Há 87% de chance de este date terminar em uma história épica. ⚔️");
+      phrases.push("Você tem um espírito livre e corajoso. Com você, até um improviso vira uma grande aventura! 🐉");
+    }
+
+    if (answers.quizIntencao === 'Romance') {
+      phrases.push("Alerta de romance no ar! O clima promete ser digno de uma linda comédia romântica. 💕");
+      phrases.push("Seu coração está aberto para momentos doces e conexões verdadeiras. Romance garantido! 🕯️");
+    }
+
+    if (answers.quizSobremesa === 'Sim' || answers.quizSobremesa === 'Depende da sobremesa') {
+      phrases.push("Seu date perfeito tem 87% de chance de terminar com duas colheres e uma sobremesa dividida. 🍰");
+    } else if (answers.quizSobremesa === 'Não' || answers.quizSobremesa === 'Absolutamente não, peça a sua') {
+      phrases.push("Respeito sagrado à sobremesa individual: a base de uma convivência madura e feliz! 🛑🍰");
+    }
+
+    if (answers.quizTrilha?.trim()) {
+      phrases.push("Sua trilha sonora demonstra que você tem um gosto musical impecável. O som do carro está garantido! 🎵");
+    }
+  }
+
+  // Fallbacks
+  phrases.push("Seu date perfeito tem 100% de chance de terminar com um sorriso bobo no rosto. 😊");
+  phrases.push("Aparentemente, temos aqui uma pessoa de muito bom gosto para programações de lazer! 🌟");
+  phrases.push("Previsão do tempo para o nosso encontro: 100% de chance de sintonia, risadas e conexão. ☀️");
+
+  // Deterministically choose one based on answers length
+  const seed = (answers?.quizIntencao?.length || 0) + (answers?.quizAventura?.length || 0) + (answers?.quizFilme?.length || 0) + 7;
+  return phrases[seed % phrases.length];
+}
+
 export default function SuccessScreen({ result }) {
   const confettiRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState(null);
@@ -166,6 +207,72 @@ export default function SuccessScreen({ result }) {
             </span>
             <div style={{ fontSize: '1.6rem', color: 'var(--color-text-primary)', fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '1px', textShadow: '0 0 10px rgba(255, 64, 129, 0.5)' }}>
               {timeLeft}
+            </div>
+          </div>
+        )}
+
+        {/* Ticket Instagramável "Seu Date Ideal" */}
+        {planDetails && (
+          <div style={{
+            margin: '0.5rem 0 1.5rem 0',
+            padding: '1.5rem',
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '2px dashed var(--color-primary)',
+            borderRadius: '16px',
+            position: 'relative',
+            boxShadow: '0 8px 32px 0 rgba(224, 64, 251, 0.15)',
+            backdropFilter: 'blur(8px)',
+            color: 'var(--color-text-primary)'
+          }}>
+            {/* Circle notches on sides to make it look like a real ticket */}
+            <div style={{ position: 'absolute', top: '50%', left: '-10px', transform: 'translateY(-50%)', width: '20px', height: '20px', background: '#0e0b16', borderRadius: '50%' }} />
+            <div style={{ position: 'absolute', top: '50%', right: '-10px', transform: 'translateY(-50%)', width: '20px', height: '20px', background: '#0e0b16', borderRadius: '50%' }} />
+
+            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: '1.4rem', color: '#ff4081', margin: 0, fontFamily: 'var(--font-script)', textShadow: '0 0 10px rgba(255, 64, 129, 0.3)' }}>
+                💘 Seu Date Ideal
+              </h2>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '0.2rem' }}>
+                Recibo Oficial de Amor
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.95rem', borderBottom: '1px dashed rgba(255, 255, 255, 0.15)', paddingBottom: '1rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>✨</span>
+                <span><strong>Encontro:</strong> {planDetails.activityLabel}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>📍</span>
+                <span><strong>Detalhes:</strong> {planDetails.subActivity}</span>
+              </div>
+              {planDetails.quizAnswers?.quizAventura && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>❤️</span>
+                  <span><strong>Aventura:</strong> {planDetails.quizAnswers.quizAventura}</span>
+                </div>
+              )}
+              {planDetails.quizAnswers?.quizMood && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>🕯️</span>
+                  <span><strong>Estilo:</strong> {planDetails.quizAnswers.quizMood}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Personalized Phrase / Analysis */}
+            <div style={{
+              textAlign: 'center',
+              fontStyle: 'italic',
+              fontSize: '0.9rem',
+              lineHeight: 1.5,
+              color: 'var(--color-primary)',
+              padding: '0.5rem',
+              background: 'rgba(224, 64, 251, 0.05)',
+              borderRadius: '8px',
+              border: '1px solid rgba(224, 64, 251, 0.15)'
+            }}>
+              "{getPersonalizedPhrase(planDetails.quizAnswers)}"
             </div>
           </div>
         )}

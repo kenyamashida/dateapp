@@ -526,24 +526,35 @@ export default function BookingForm({ onSuccess, onBack }) {
       </div>
 
       {/* Progress Bar */}
-      <div className="progress-container">
-        <div className="progress-bar-fill" style={{ width: `${((step - 1) / 4) * 100}%` }} />
-        <div className="progress-dots">
-          {[1, 2, 3, 4, 5].map((s) => (
-            <div 
-              key={s} 
-              className={`progress-dot ${s <= step ? 'active' : ''} ${s === step ? 'current' : ''}`}
-              title={`Passo ${s}`}
-            >
-              {s === 1 && "🍕"}
-              {s === 2 && "🎬"}
-              {s === 3 && "🏆"}
-              {s === 4 && "🚗"}
-              {s === 5 && "📆"}
+      {(() => {
+        const progressPercent = Math.round((step / 5) * 100);
+        return (
+          <div style={{ margin: '0.5rem 0 1.5rem 0' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--color-text-secondary)', marginBottom: '0.4rem', fontWeight: 'bold' }}>
+              <span>❤️ Etapa {step} de 5</span>
+              <span>{progressPercent}% concluído</span>
             </div>
-          ))}
-        </div>
-      </div>
+            <div style={{
+              width: '100%',
+              height: '8px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              position: 'relative'
+            }}>
+              <div style={{
+                width: `${progressPercent}%`,
+                height: '100%',
+                background: 'linear-gradient(90deg, var(--color-primary), #ff4081)',
+                borderRadius: '4px',
+                boxShadow: '0 0 10px rgba(224, 64, 251, 0.5)',
+                transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+              }} />
+            </div>
+          </div>
+        );
+      })()}
       
       {/* ── PASSO 1: Estilo do Date ── */}
       {step === 1 && (
