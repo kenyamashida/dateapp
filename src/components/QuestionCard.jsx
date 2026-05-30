@@ -30,6 +30,33 @@ export default function QuestionCard({ onYes }) {
   // Read VITE_GUEST_NAME from environment or "name" query parameter from URL (e.g. ?name=Carol)
   const name = import.meta.env.VITE_GUEST_NAME || new URLSearchParams(window.location.search).get('name') || '';
 
+  const playChime = () => {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      
+      const playNote = (freq, start, duration) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        gainNode.gain.setValueAtTime(0.15, start);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, start + duration);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+      };
+
+      playNote(523.25, now, 0.4);
+      playNote(659.25, now + 0.1, 0.4);
+      playNote(784.00, now + 0.2, 0.4);
+      playNote(1046.50, now + 0.3, 0.6);
+    } catch (e) {
+      console.warn("AudioContext failed:", e);
+    }
+  };
+
   // ── Initial position: align "Não" on top of the ghost spacer ─────────────
   useEffect(() => {
     if (!initialized.current && ghostRef.current) {
@@ -119,7 +146,10 @@ export default function QuestionCard({ onYes }) {
           <button
             id="btn-yes"
             className="btn-yes"
-            onClick={onYes}
+            onClick={() => {
+              playChime();
+              setTimeout(onYes, 250);
+            }}
           >
             ✨ Sim!
           </button>

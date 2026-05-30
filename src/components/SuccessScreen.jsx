@@ -27,9 +27,37 @@ export default function SuccessScreen({ result }) {
   const confettiRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState(null);
 
+  const playConfettiSound = () => {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      
+      const playNote = (freq, start, duration) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, start);
+        gainNode.gain.setValueAtTime(0.08, start);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, start + duration);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+      };
+
+      const notes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50, 1174.66, 1318.51];
+      notes.forEach((freq, index) => {
+        playNote(freq, now + index * 0.05, 0.4);
+      });
+    } catch (e) {
+      console.warn("AudioContext failed:", e);
+    }
+  };
+
   useEffect(() => {
     if (confettiRef.current) {
       createConfetti(confettiRef.current);
+      playConfettiSound();
       const t = setTimeout(() => {
         if (confettiRef.current) createConfetti(confettiRef.current);
       }, 800);
