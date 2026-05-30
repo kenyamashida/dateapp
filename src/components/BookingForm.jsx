@@ -45,76 +45,24 @@ const ACTIVITY_OPTIONS = {
     label: "Ar ao Livre 🌳",
     emoji: "🌳",
     subLabel: "O que vamos fazer lá fora? ☀️",
-    locationLabel: "Escolha o parque ideal: 📍",
     subOptions: [
-      { label: "Piquenique 🧺", locations: [
-        "Parque Ceret — Tatuapé 🌳 (10 min, perto de casa!)",
-        "Parque Piqueri — Tatuapé 🌿 (10 min, arborizado e tranquilo)",
-        "Parque do Carmo — Itaquera 🍃 (20 min, bosque lindo + cerejeiras)",
-        "Parque da Vila Prudente 🌸 (15 min, gramado com lago japonês)"
-      ]},
-      { label: "Caminhada + conversa 🚶‍♂️", locations: [
-        "Parque Piqueri — Tatuapé 🌿 (10 min, trilhas e natureza)",
-        "Parque Ceret — Tatuapé 🌳 (10 min, pistas e muito verde)",
-        "Parque Ecológico do Tietê 🦋 (20 min, natureza intocada)",
-        "Parque do Carmo — Itaquera 🌲 (20 min, trilhas na mata)"
-      ]},
-      { label: "Andar de bicicleta 🚲", locations: [
-        "Parque Ceret — Tatuapé 🚲 (10 min, ciclovia completa)",
-        "Parque Ecológico do Tietê 🚴 (20 min, ciclovia extensa)",
-        "Parque Linear Aricanduva 🚲 (15 min, longa ciclovia na Zona Leste)",
-        "Parque do Carmo — Itaquera 🚴 (20 min, circuito interno)"
-      ]},
-      { label: "Ver o pôr do sol 🌅", locations: [
-        "Parque Piqueri — Tatuapé 🌇 (10 min, horário dourado)",
-        "Parque do Carmo — Itaquera 🌅 (20 min, vista aberta e bonita)",
-        "Parque da Independência — Ipiranga 🏛️ (20 min, terraço histórico)",
-        "Pico do Jaraguá 🌄 (40 min, ponto mais alto de SP — vale a viagem!)"
-      ]},
-      { label: "Passear com café na mão ☕", locations: [
-        "Tatuapé (bares e cafés charmosos) ☕ (10 min)",
-        "Mooca (cultura italiana + cafeterias) 🍕 (15 min)",
-        "Vila Prudente (bairro acolhedor e calmo) 🌿 (15 min)",
-        "Jardins (elegante, mais longe mas vale!) 🌸 (30 min)"
-      ]}
+      "Piquenique 🧺",
+      "Caminhada + conversa 🚶‍♂️",
+      "Andar de bicicleta 🚲",
+      "Ver o pôr do sol 🌅",
+      "Passear com café na mão ☕"
     ]
   },
   cafe_conversa: {
     label: "Café e Conversa ☕",
     emoji: "☕",
     subLabel: "Qual o cenário ideal? 💭",
-    locationLabel: "Sugestão de lugar: 📍",
     subOptions: [
-      { label: "Cafeteria chique ✨", locations: [
-        "Zero11SP — Tatuapé ✨ (café premium + espaço moderno, pertíssimo!)",
-        "Cafés no Shopping Anália Franco ☕ (10 min, várias opções)",
-        "Cafés no Boulevard Tatuapé 🌟 (ao lado do metrô)",
-        "Santo Grão — Jardins 🌟 (30 min, vale a viagem!)"
-      ]},
-      { label: "Café histórico 🏛️", locations: [
-        "Casa do Tatuapé 🏛️ (10 min, construção do século XVII!)",
-        "Café Girondino — Centro 🏛️ (30 min, em frente ao Mosteiro São Bento)",
-        "Casa Godinho — Centro ☕ (30 min, fundada em 1888)",
-        "Café do Pateo — Centro 🕌 (30 min, berço de São Paulo)"
-      ]},
-      { label: "Brunch instagramável 📸", locations: [
-        "Casa Rios — Tatuapé 🍽️ (pertíssimo! gastronomia autoral fotogênica)",
-        "Restaurantes badalados do Tatuapé 📸 (10 min, várias opções)",
-        "Botanikafé — Jardins 🌿 (30 min, ícone do brunch em SP)",
-        "Café Cherie — Jardins 🩷 (30 min, estética europeia cor-de-rosa)"
-      ]},
-      { label: "Café + livraria 📚", locations: [
-        "Livrarias do Shopping Anália Franco 📚 (10 min!)",
-        "Livrarias do Boulevard Tatuapé 📖 (10 min, ao lado do metrô)",
-        "Cuia Café na Megafauna (Copan) 📖 (25 min, experiência única)",
-        "Bibla — Vila Madalena 📚 (30 min, minimalista e charmosa)"
-      ]},
-      { label: "Café + passeio 🚶‍♀️", locations: [
-        "Tatuapé (café + comércio de rua charmoso) 🛍️ (10 min!)",
-        "Mooca (café + cultura italiana) 🍕 (15 min)",
-        "Bairro da Liberdade (café + cultura japonesa) 🎎 (25 min)",
-        "Vila Madalena (arte + café + grafites) 🎨 (30 min)"
-      ]}
+      "Cafeteria chique ✨",
+      "Café histórico 🏛️",
+      "Brunch instagramável 📸",
+      "Café + livraria 📚",
+      "Café + passeio 🚶‍♀️"
     ]
   },
   gastronomico: {
@@ -127,172 +75,69 @@ const ACTIVITY_OPTIONS = {
     label: "Divertido 🎮",
     emoji: "🎮",
     subLabel: "Qual vai ser a nossa diversão? 🥳",
-    locationLabel: "Onde vamos? 📍",
     subOptions: [
-      { label: "Jogos de tabuleiro 🎲", locations: [
-        "Ludus Luderia — Tatuapé 🎲 (pertíssimo! 100+ jogos de tabuleiro)",
-        "Cafés com jogos no Shopping Anália Franco 🎯 (10 min)",
-        "Dungeon Pub — Vila Madalena 🐉 (30 min, temática medieval + drinks)",
-        "Fan Hour — Pinheiros 🕹️ (30 min, boardgames + videogames retrô)"
-      ]},
-      { label: "Karaokê 🎤", locations: [
-        "Janela Bar — Tatuapé 🎤 (pertíssimo! karaokê às quartas e domingos)",
-        "Bário Bar — Tatuapé 🎵 (10 min, ambiente animado e divertido)",
-        "Arena Karaokê & Bar 🎤 (25 min, 11 salas privativas, Bom Retiro)",
-        "Siga La Vaca 🎶 (25 min, clássico animado, Santa Cecília)"
-      ]},
-      { label: "Boliche 🎳", locations: [
-        "Dutch Food & Beer — Anália Franco 🎳 (10 min! boliche + arcade + drinks)",
-        "Garagem 55 — Mooca 🎳 (15 min, espaço amplo e animado)",
-        "Villa Bowling — Shopping Eldorado 🎳 (30 min, moderno)",
-        "SP Diversões — Butantã 🎳 (35 min, + kart e fliperama)"
-      ]},
-      { label: "Escape room 🔑", locations: [
-        "Escape Time — verificar unidade Zona Leste 🔒 (mais próxima)",
-        "Escape 60' — verificar unidade mais próxima ⏱️",
-        "Escape Hotel — Centro 🏨 (25 min, ultra-imersivo)",
-        "Gravity VR — Moema 🥽 (25 min, escape room em realidade virtual)"
-      ]},
-      { label: "Fliperama retrô 👾", locations: [
-        "Lord's Diversões — Tatuapé 🕹️ (pertíssimo! histórico e nostálgico)",
-        "Bário Bar — Tatuapé 👾 (10 min, maior barcade da América Latina!)",
-        "Fan Hour — Pinheiros 🎮 (30 min, consoles retrô + hambúrgueres)",
-        "SP Diversões — Butantã 👾 (35 min, enorme complexo)"
-      ]},
-      { label: "Minigolfe ⛳", locations: [
-        "Play City — Shopping Anália Franco ⛳ (10 min, pertíssimo!)",
-        "Play City — Shopping Tatuapé ⛳ (10 min)",
-        "Play City — outras unidades em shoppings de SP ⛳",
-        "Hopi Hari — Vinhedo ⛳ (mais longe, mas uma aventura e tanto!)"
-      ]},
-      { label: "Sinuca 🎱", locations: [
-        "Lord's Diversões — Tatuapé 🎱 (pertíssimo! ambiente retrô clássico)",
-        "Bário Bar — Tatuapé 🎱 (10 min, sinuca + fliperama + drinks)",
-        "Red Billiards Club — Moema 🎱 (20 min, especializado)",
-        "Botecos tradicionais da Mooca 🎱 (15 min, autêntico)"
-      ]},
-      { label: "Realidade virtual 🥽", locations: [
-        "Gravity VR — Moema 🥽 (20 min, arena multiplayer livre)",
-        "InfinityQuest — Shopping Parque da Cidade 🌐 (25 min, VR imersivo)",
-        "Zero Latency SP 🥽 (verificar localização mais próxima)",
-        "VR Zone SP 🎮 (vasta seleção de jogos imersivos)"
-      ]}
+      "Jogos de tabuleiro 🎲",
+      "Karaokê 🎤",
+      "Boliche 🎳",
+      "Escape room 🔑",
+      "Fliperama retrô 👾",
+      "Minigolfe ⛳",
+      "Sinuca 🎱",
+      "Realidade virtual 🥽"
     ]
   },
   cultural: {
     label: "Cultural 🎭",
     emoji: "🎭",
     subLabel: "Qual o programa cultural hoje? 🎨",
-    locationLabel: "Sugestão de local: 📍",
     subOptions: [
-      { label: "Museu 🖼️", locations: [
-        "Museu da Imigração — Mooca 🏛️ (15 min! gratuito aos sábados)",
-        "Casa do Tatuapé 🏰 (10 min, museu da cidade, século XVII)",
-        "Museu do Ipiranga 🏛️ (20 min, recém restaurado, lindíssimo!)",
-        "MASP — Paulista 🎨 (30 min, ícone de São Paulo)"
-      ]},
-      { label: "Exposição 🎨", locations: [
-        "Sesc Belenzinho 🎭 (10 min! exposições + teatro + atividades)",
-        "Museu da Imigração — Mooca 📸 (15 min, exposições imersivas)",
-        "Centro Cultural da Penha 🏛️ (15 min, programação gratuita)",
-        "MASP — Paulista 🎨 (30 min, exposições temporárias incríveis)"
-      ]},
-      { label: "Planetário 🌌", locations: [
-        "Parque do Carmo — Planetário 🌟 (20 min, Itaquera)",
-        "Museu Catavento — Centro 🔬 (25 min, ciência interativa)",
-        "Planetário do Ibirapuera 🌌 (30 min, sessões mágicas)",
-        "USP — Instituto de Astronomia 🔭 (30 min, visitas abertas)"
-      ]},
-      { label: "Centro cultural 🏛️", locations: [
-        "Sesc Belenzinho 🎭 (10 min! o melhor da Zona Leste, teatro + arte)",
-        "Centro Cultural da Penha 🏛️ (15 min, Teatro Martins Pena)",
-        "Casa de Cultura Raul Seixas — Itaquera 🎸 (20 min, oficinas de arte)",
-        "Itaú Cultural — Paulista 🎭 (30 min, programação gratuita variada)"
-      ]},
-      { label: "Teatro 🎭", locations: [
-        "Sesc Belenzinho — Teatro 🎭 (10 min! programação de excelência)",
-        "Teatro Fernando Torres — Tatuapé 🎬 (10 min, 690 lugares)",
-        "Centro Cultural da Penha — Teatro Martins Pena 🎭 (15 min)",
-        "Teatro Santander — Centro 🎭 (25 min, musicais de grande porte)"
-      ]},
-      { label: "Show de jazz 🎷", locations: [
-        "Bar Mooca 🎷 (15 min! música ao vivo diária, autêntico)",
-        "Quintal do Espeto — Tatuapé 🎵 (10 min, ao ar livre + música)",
-        "Bourbon Street — Moema 🎸 (25 min, blues e jazz clássico)",
-        "JazzB — República 🎷 (30 min, tradicional bossa nova e jazz)"
-      ]},
-      { label: "Feira de arte 🖼️", locations: [
-        "Feira da Mooca (domingos na Rua da Mooca) 🍕 (15 min!)",
-        "Feira do Tatuapé 🛍️ (fim de semana, artesanato local)",
-        "Feira da Liberdade 🎎 (25 min, domingo, arte + cultura japonesa)",
-        "Feira da Benedito Calixto 🌿 (30 min, sábado em Pinheiros)"
-      ]}
+      "Museu 🖼️",
+      "Exposição 🎨",
+      "Planetário 🌌",
+      "Centro cultural 🏛️",
+      "Teatro 🎭",
+      "Show de jazz 🎷",
+      "Feira de arte 🖼️"
+    ]
+  },
+  shopping: {
+    label: "Shopping 🛍️",
+    emoji: "🛍️",
+    subLabel: "O que vamos fazer no Shopping? 🛍️",
+    subOptions: [
+      "Compras e vitrines 🛍️",
+      "Comer na praça de alimentação 🍕",
+      "Jogar boliche ou fliperama 🎳",
+      "Apenas passear e bater papo 🚶‍♀️"
+    ]
+  },
+  cinema: {
+    label: "Cinema 🎬",
+    emoji: "🎬",
+    subLabel: "Qual tipo de filme vamos assistir? 🍿",
+    subOptions: [
+      "Filme de Ação / Aventura 🍿",
+      "Comédia Romântica 💕",
+      "Terror / Suspense 😱",
+      "Drama / Cult 🎭",
+      "Animação / Fantasia 🦄"
     ]
   },
   diferentao: {
     label: "Diferentão 👽",
     emoji: "👽",
     subLabel: "Qual vai ser a nossa aventura incomum? 🌠",
-    locationLabel: "Onde vamos fazer isso? 📍",
     subOptions: [
-      { label: "Observar estrelas no planetário 🌠", locations: [
-        "Parque do Carmo — Itaquera 🌟 (20 min, área aberta sem poluição)",
-        "Museu Catavento — Centro 🔬 (25 min, sessões de planetário)",
-        "Planetário do Ibirapuera 🌌 (30 min, experiência inesquecível)",
-        "Pico do Jaraguá 🌟 (40 min, céu limpo e altitude — épico!)"
-      ]},
-      { label: "Fazer um piquenique noturno 🌙", locations: [
-        "Parque Ceret — Tatuapé 🌙 (10 min, tem iluminação à noite)",
-        "Parque Piqueri — Tatuapé 🌿 (10 min, tranquilo e arborizado)",
-        "Parque do Carmo — Itaquera 🌳 (20 min, espaços gramados enormes)",
-        "Parque da Independência — Ipiranga 🌃 (20 min, vista da cidade)"
-      ]},
-      { label: "Assistir ao nascer do sol 🌅", locations: [
-        "Parque Ceret — Tatuapé 🌅 (10 min, se sair cedinho!)",
-        "Parque do Carmo — Itaquera 🌄 (20 min, espaço aberto e lindo)",
-        "Parque da Independência — Ipiranga 🌇 (20 min, vista panorâmica)",
-        "Pico do Jaraguá 🌄 (40 min, épico — vale MUITO a viagem!)"
-      ]},
-      { label: "Visitar uma feira gastronômica 🍕", locations: [
-        "Feira da Mooca (domingos) 🍕 (15 min! pertíssimo)",
-        "Feira do Tatuapé 🛍️ (fim de semana, pertíssimo)",
-        "Mercadão de SP — Centro 🧀 (25 min, histórico e delicioso)",
-        "Feira da Liberdade 🍱 (25 min, domingo, culinária asiática)"
-      ]},
-      { label: "Passeio fotográfico pela cidade 📸", locations: [
-        "Tatuapé + arredores históricos 📸 (pertíssimo, começa aqui!)",
-        "Mooca (arquitetura italiana + muros grafitados) 🎨 (15 min)",
-        "Centro Histórico de SP 🏛️ (25 min, arquitetura impressionante)",
-        "Vila Madalena + Beco do Batman 🎨 (30 min, grafites icônicos)"
-      ]},
-      { label: "Caça ao tesouro pela Paulista 🗺️", locations: [
-        "Ponto de partida: Metrô Tatuapé 🗺️ (aqui do lado!)",
-        "Ponto de partida: Metrô Belém 🚇 (10 min de casa)",
-        "Ponto de partida: Metrô Brás 🏛️ (20 min, cheio de pistas)",
-        "Ponto de partida: Avenida Paulista 🌆 (30 min, clássico)"
-      ]},
-      { label: "Tour de cafeterias ☕", locations: [
-        "Rota: Tatuapé → Mooca → Belém ☕ (toda na Zona Leste!)",
-        "Rota: Tatuapé → Liberdade → Centro Histórico 🏛️",
-        "Rota: Mooca → Ipiranga → Vila Mariana ☕",
-        "Rota: Tatuapé → Pinheiros → Jardins 🌿 (aventura completa de SP)"
-      ]},
-      { label: "Escolher um bairro aleatório e explorar juntos 🗺️", locations: [
-        "Lapa 🎸 (música, botecos e tradição)",
-        "Sortear no dado! 🎲 (roleta da aventura)"
-      ]},
-      { label: "Encontrar o melhor pastel de São Paulo 🥟", locations: [
-        "Mercadão de SP 🏛️ (pastel de bacalhau famoso)",
-        "Feira da Liberdade 🥟 (pastéis japoneses únicos)",
-        "Feira da Benedito Calixto 🌿 (pastéis artesanais)",
-        "Feira da Lapa 🎸 (pastéis de diferentes recheios)"
-      ]},
-      { label: "Competição de quem monta o melhor roteiro de R$50 💰", locations: [
-        "Ponto de partida: Metrô Brigadeiro 💡",
-        "Ponto de partida: Metrô Vila Madalena 🎨",
-        "Ponto de partida: Metrô Sé (Centro) 🏛️",
-        "Ponto de partida: Metrô Consolação 🌆"
-      ]}
+      "Observar estrelas no planetário 🌠",
+      "Fazer um piquenique noturno 🌙",
+      "Assistir ao nascer do sol 🌅",
+      "Visitar uma feira gastronômica 🍕",
+      "Passeio fotográfico pela cidade 📸",
+      "Caça ao tesouro pela Paulista 🗺️",
+      "Tour de cafeterias ☕",
+      "Escolher um bairro aleatório e explorar juntos 🗺️",
+      "Encontrar o melhor pastel de São Paulo 🥟",
+      "Competição de roteiro de R$50 💰"
     ]
   }
 };
@@ -300,46 +145,17 @@ const ACTIVITY_OPTIONS = {
 const CUISINES = {
   asiatica: {
     label: "Culinária Asiática 🥢",
-    styles: ["Japonesa 🍣", "Coreana 🇰🇷", "Tailandesa 🇹🇭", "Chinesa 🇨🇳"],
-    suggestions: [
-      "Domo Sushi Bar — Tatuapé 🍣 (pertíssimo! premium e moderno)",
-      "Ikeda Sushi — Tatuapé 🍱 (rodízio variado, ambiente lindo)",
-      "Hojiro Sushi — Tatuapé 🍣 (completo, inclui sobremesa no rodízio)",
-      "Cho Sun Gal Bi — Tatuapé 🇰🇷 (churrasco coreano incrível — wagyu!)",
-      "Kenichi Sushi — Mooca 🍣 (tradicional e clássico, 15 min)"
-    ]
+    styles: ["Japonesa 🍣", "Coreana 🇰🇷", "Tailandesa 🇹🇭", "Chinesa 🇨🇳"]
   },
   arabe: {
     label: "Culinária Árabe 🧆",
-    styles: ["Esfihas e kibes 🧆", "Comida libanesa 🇱🇧", "Comida síria 🇸🇾"],
-    suggestions: [
-      "Zain Restaurante — Tatuapé 🧆 (pertíssimo! contemporâneo e animado)",
-      "Mazbut Culinária Árabe — Tatuapé 🥙 (receitas de família, autêntico)",
-      "Esfiha Imigrantes — Tatuapé 🧆 (tradicional e acessível)",
-      "Ryad — Tatuapé 🌙 (ambiente elegante e imersivo)",
-      "Outro/Surpresa! ✨"
-    ]
+    styles: ["Esfihas e kibes 🧆", "Comida libanesa 🇱🇧", "Comida síria 🇸🇾"]
   },
   italiana: {
     label: "Culinária Italiana 🍝",
-    styles: ["Massas artesanais 🍝", "Pizza napolitana 🍕", "Jantar romântico 🍷"],
-    suggestions: [
-      "Bráz Pizzaria — Tatuapé 🍕 (pertíssimo! premiada e referência em SP)",
-      "La Pergoletta — Tatuapé 🍝 (massas artesanais, selo de autenticidade italiana)",
-      "Verttoni — Tatuapé 🍝 (cantina clássica com massas incríveis)",
-      "A Pizza da Mooca 🍕 (15 min, reconhecida como uma das melhores de SP!)",
-      "Di Cunto — Mooca 🍮 (15 min, confeitaria centenária + restaurante)"
-    ]
+    styles: ["Massas artesanais 🍝", "Pizza napolitana 🍕", "Jantar romântico 🍷"]
   }
 };
-
-// Helper: get locations for current sub-activity
-function getSubLocations(activityType, subActivityLabel) {
-  const act = ACTIVITY_OPTIONS[activityType];
-  if (!act || act.isGastronomic || !act.subOptions) return null;
-  const sub = act.subOptions.find(s => s.label === subActivityLabel);
-  return sub?.locations || null;
-}
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function BookingForm({ onSuccess, onBack }) {
@@ -349,12 +165,12 @@ export default function BookingForm({ onSuccess, onBack }) {
   // Passo 1: Estilo do Date
   const [activityType, setActivityType] = useState('');
   const [subActivity,  setSubActivity]  = useState('');
-  const [selectedLoc,  setSelectedLoc]  = useState('');
+  const [locationPreference, setLocationPreference] = useState(''); // 'surprise' | 'suggest'
+  const [customLocation,     setCustomLocation]     = useState('');
   
   // Gastronômico específico
   const [selectedCuisine, setSelectedCuisine] = useState('');
   const [selectedStyle,   setSelectedStyle]   = useState('');
-  const [cuisineSugg,     setCuisineSugg]     = useState('');
 
   // Passo 2: Perguntas Finais
   const [quizIntencao, setQuizIntencao] = useState('');
@@ -362,6 +178,8 @@ export default function BookingForm({ onSuccess, onBack }) {
   const [quizFilme,    setQuizFilme]    = useState('');
   const [quizSobremesa, setQuizSobremesa] = useState('');
   const [quizRestricao, setQuizRestricao] = useState('');
+  const [quizTrilha,    setQuizTrilha]    = useState('');
+  const [quizMood,      setQuizMood]      = useState('');
 
   // Passo 3: Critérios de Aprovação
   const [appDogs,      setAppDogs]      = useState(false);
@@ -393,20 +211,22 @@ export default function BookingForm({ onSuccess, onBack }) {
   // Reset nested options when category changes
   useEffect(() => {
     setSubActivity('');
-    setSelectedLoc('');
     setSelectedCuisine('');
     setSelectedStyle('');
-    setCuisineSugg('');
+    setLocationPreference('');
+    setCustomLocation('');
   }, [activityType]);
 
   // Reset location when sub-activity changes
   useEffect(() => {
-    setSelectedLoc('');
+    setLocationPreference('');
+    setCustomLocation('');
   }, [subActivity]);
 
   useEffect(() => {
     setSelectedStyle('');
-    setCuisineSugg('');
+    setLocationPreference('');
+    setCustomLocation('');
   }, [selectedCuisine]);
 
   // Auto-check approved status if all criteria are ticked!
@@ -424,28 +244,24 @@ export default function BookingForm({ onSuccess, onBack }) {
     const act = ACTIVITY_OPTIONS[activityType];
     
     if (act.isGastronomic) {
-      return !!(selectedCuisine && selectedStyle && cuisineSugg);
+      if (!selectedCuisine || !selectedStyle) return false;
+    } else {
+      const hasSubs = act.subOptions && act.subOptions.length > 0;
+      if (hasSubs && !subActivity) return false;
     }
     
-    const hasSubs = act.subOptions && act.subOptions.length > 0;
-    if (hasSubs && !subActivity) return false;
-    
-    // Check if the selected sub-activity has locations that must be chosen
-    if (subActivity) {
-      const subLocs = getSubLocations(activityType, subActivity);
-      if (subLocs && subLocs.length > 0 && !selectedLoc) return false;
-    }
+    if (!locationPreference) return false;
+    if (locationPreference === 'suggest' && !customLocation.trim()) return false;
     
     return true;
   };
 
   const isStep2Valid = () => {
-    return !!(quizIntencao && quizAventura && quizFilme && quizSobremesa);
+    return true;
   };
 
   const isStep3Valid = () => {
-    // Requires at least the approved badge status to be active to proceed!
-    return appStatus;
+    return true;
   };
 
   const isStep4Valid = () => {
@@ -539,12 +355,16 @@ export default function BookingForm({ onSuccess, onBack }) {
       let formattedActivity = chosenActivity.label;
       let chosenDetails = '';
 
+      const locationText = locationPreference === 'surprise'
+        ? 'Surpresa! 🎁'
+        : `Sugerido: ${customLocation}`;
+
       if (chosenActivity.isGastronomic) {
         const cuisine = CUISINES[selectedCuisine];
         formattedActivity = `Date Gastronômico 🍽️`;
-        chosenDetails = `${cuisine.label} (${selectedStyle}) — Sugestão: ${cuisineSugg}`;
+        chosenDetails = `${cuisine.label} (${selectedStyle}) — Lugar: ${locationText}`;
       } else {
-        chosenDetails = `${subActivity}${selectedLoc ? ` em: ${selectedLoc}` : ''}`;
+        chosenDetails = `${subActivity} — Lugar: ${locationText}`;
       }
       
       const startStr = `${selectedDate.replace(/-/g, '')}T${String(selectedSlot.hour).padStart(2, '0')}0000`;
@@ -560,6 +380,8 @@ export default function BookingForm({ onSuccess, onBack }) {
       descriptionText += `• Nível de aventura: ${quizAventura}\\n`;
       descriptionText += `• Filme do Encontro: ${quizFilme}\\n`;
       descriptionText += `• Dividir sobremesa: ${quizSobremesa}\\n`;
+      descriptionText += `• Mood ideal: ${quizMood}\\n`;
+      descriptionText += `• Trilha Sonora sugerida: ${quizTrilha.trim() || 'Sem som específico 🎵'}\\n`;
       descriptionText += `• Restrições/Alergias: ${quizRestricao.trim() || 'Nenhuma restrição alimentar! 🌱'}\\n\\n`;
       descriptionText += `🚗 LOGÍSTICA:\\n• ${meetingType === 'busco' ? `Te busco em casa: ${address} 🚗` : `Nos encontramos lá! 🚶‍♂️`}\\n\\n`;
       descriptionText += `🏆 CRITÉRIOS DE APROVAÇÃO: Todos aceitos! 🏅`;
@@ -579,6 +401,8 @@ export default function BookingForm({ onSuccess, onBack }) {
       whatsappMessage += `• Nível de Aventura: ${quizAventura}\n`;
       whatsappMessage += `• Gênero de Filme: ${quizFilme}\n`;
       whatsappMessage += `• Dividir Sobremesa: ${quizSobremesa}\n`;
+      whatsappMessage += `• Mood do Date: ${quizMood}\n`;
+      whatsappMessage += `• Playlist/Som: ${quizTrilha.trim() || 'Sem preferência de som! 🎵'}\n`;
       whatsappMessage += `• Alergia/Restrição: ${quizRestricao.trim() || 'Nenhuma restrição! 🌱'}\n\n`;
       whatsappMessage += `✅ TERMOS DE APROVAÇÃO: Todos os critérios foram cumpridos e aceitos! 🐕🍕⏱️🚶‍♀️🚫\n`;
       whatsappMessage += `🏆 STATUS: Aprovado para um primeiro encontro em São Paulo!\n\n`;
@@ -608,6 +432,8 @@ export default function BookingForm({ onSuccess, onBack }) {
             "Nível de Aventura": quizAventura,
             "Gênero de Filme": quizFilme,
             "Dividir Sobremesa": quizSobremesa,
+            "Mood do Date": quizMood,
+            "Trilha Sonora": quizTrilha.trim() || 'Sem preferência! 🎵',
             "Restrição Alimentar": quizRestricao.trim() || 'Nenhuma restrição! 🌱',
             _honey: "",
             _template: "table"
@@ -621,6 +447,7 @@ export default function BookingForm({ onSuccess, onBack }) {
         times: {
           dateStr: formatDateDisplay(selectedDate),
           timeStr: `${selectedSlot.label} – ${String(selectedSlot.hour + 2).padStart(2, '0')}:00`,
+          targetIso: toISO(selectedDate, selectedSlot.hour)
         },
         planDetails: {
           guestName: GUEST_NAME,
@@ -632,7 +459,9 @@ export default function BookingForm({ onSuccess, onBack }) {
             quizAventura,
             quizFilme,
             quizSobremesa,
-            quizRestricao
+            quizRestricao,
+            quizMood,
+            quizTrilha
           }
         }
       });
@@ -721,32 +550,11 @@ export default function BookingForm({ onSuccess, onBack }) {
                   >
                     <option value="">Selecione uma opção incrível...</option>
                     {ACTIVITY_OPTIONS[activityType].subOptions.map((sub, i) => (
-                      <option key={i} value={sub.label}>{sub.label}</option>
+                      <option key={i} value={sub}>{sub}</option>
                     ))}
                   </select>
                 </div>
               )}
-
-              {/* Seleção de Local — dinâmica por sub-opção */}
-              {subActivity && (() => {
-                const subLocs = getSubLocations(activityType, subActivity);
-                if (!subLocs || subLocs.length === 0) return null;
-                return (
-                  <div className="form-group fade-in">
-                    <label className="date-label">{ACTIVITY_OPTIONS[activityType].locationLabel}</label>
-                    <select
-                      className="date-input"
-                      value={selectedLoc}
-                      onChange={(e) => setSelectedLoc(e.target.value)}
-                    >
-                      <option value="">Escolha onde vamos...</option>
-                      {subLocs.map((loc, i) => (
-                        <option key={i} value={loc}>{loc}</option>
-                      ))}
-                    </select>
-                  </div>
-                );
-              })()}
             </div>
           )}
 
@@ -785,21 +593,47 @@ export default function BookingForm({ onSuccess, onBack }) {
                   </select>
                 </div>
               )}
+            </div>
+          )}
 
-              {/* 3. Selecionar Sugestão de Local */}
-              {selectedCuisine && selectedStyle && (
+          {/* Quer sugerir algum lugar ou prefere surpresa? */}
+          {((activityType && !ACTIVITY_OPTIONS[activityType].isGastronomic && subActivity) ||
+            (activityType && ACTIVITY_OPTIONS[activityType].isGastronomic && selectedCuisine && selectedStyle)) && (
+            <div className="location-preference-section fade-in" style={{ marginTop: '1.5rem' }}>
+              <label className="date-label">📍 Você quer sugerir algum lugar ou prefere surpresa?</label>
+              <div className="transport-toggle-grid" style={{ marginBottom: '1.25rem' }}>
+                <button
+                  type="button"
+                  className={`transport-btn ${locationPreference === 'surprise' ? 'active' : ''}`}
+                  onClick={() => {
+                    setLocationPreference('surprise');
+                    setCustomLocation('');
+                  }}
+                >
+                  <span className="transport-icon">🎁</span>
+                  <span className="transport-text">Surpresa!</span>
+                </button>
+                <button
+                  type="button"
+                  className={`transport-btn ${locationPreference === 'suggest' ? 'active' : ''}`}
+                  onClick={() => setLocationPreference('suggest')}
+                >
+                  <span className="transport-icon">✍️</span>
+                  <span className="transport-text">Quero sugerir</span>
+                </button>
+              </div>
+
+              {locationPreference === 'suggest' && (
                 <div className="form-group fade-in">
-                  <label className="date-label">📍 Sugestões de restaurantes:</label>
-                  <select
+                  <label className="date-label" htmlFor="custom-location-input">💡 Onde você gostaria de ir?</label>
+                  <input
+                    id="custom-location-input"
+                    type="text"
                     className="date-input"
-                    value={cuisineSugg}
-                    onChange={(e) => setCuisineSugg(e.target.value)}
-                  >
-                    <option value="">Escolha um restaurante...</option>
-                    {CUISINES[selectedCuisine].suggestions.map((sugg, i) => (
-                      <option key={i} value={sugg}>{sugg}</option>
-                    ))}
-                  </select>
+                    placeholder="Digite o nome do restaurante, shopping, parque, cinema..."
+                    value={customLocation}
+                    onChange={(e) => setCustomLocation(e.target.value)}
+                  />
                 </div>
               )}
             </div>
@@ -828,7 +662,7 @@ export default function BookingForm({ onSuccess, onBack }) {
             
             {/* 1. Intenção */}
             <div className="form-group-quiz">
-              <span className="quiz-question">🎯 Qual sua intenção?</span>
+              <span className="quiz-question">🎯 O que você procura agora?</span>
               <div className="quiz-radio-grid">
                 {[
                   ["Apenas conhecer alguém legal ✌️", "Apenas conhecer alguém legal"],
@@ -922,6 +756,42 @@ export default function BookingForm({ onSuccess, onBack }) {
               </div>
             </div>
 
+            {/* Seletor de Mood / Dress Code */}
+            <div className="form-group-quiz">
+              <span className="quiz-question">🕯️ Qual o 'mood' / vestimenta ideal?</span>
+              <div className="quiz-radio-grid">
+                {[
+                  ["Casual e Confortável 👟", "Casual e Confortável"],
+                  ["Elegante e Perfumado 🍷", "Elegante e Perfumado"],
+                  ["Surpresa (me avisa antes!) 🤫", "Surpresa (me avisa antes!)"]
+                ].map(([label, val]) => (
+                  <label key={val} className={`quiz-radio-btn ${quizMood === val ? 'checked' : ''}`}>
+                    <input 
+                      type="radio" 
+                      name="quizMood" 
+                      value={val} 
+                      checked={quizMood === val}
+                      onChange={() => setQuizMood(val)} 
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Playlist / Trilha Sonora */}
+            <div className="form-group-quiz">
+              <label htmlFor="trilha-input" className="quiz-question">🎵 Qual música ou playlist não pode faltar no caminho?</label>
+              <input
+                id="trilha-input"
+                type="text"
+                className="date-input"
+                placeholder="Ex: Seu artista favorito, uma música romântica ou link do Spotify... (opcional)"
+                value={quizTrilha}
+                onChange={(e) => setQuizTrilha(e.target.value)}
+              />
+            </div>
+
             {/* 5. Restrição alimentar (Pergunta Carinhosa) */}
             <div className="form-group-quiz">
               <label htmlFor="allergy-input" className="quiz-question">🍎 Alguma restrição alimentar, alergia ou preferência?</label>
@@ -1010,14 +880,29 @@ export default function BookingForm({ onSuccess, onBack }) {
           </div>
 
           {/* Interactive approved status badge */}
-          <div className="status-badge-wrap">
-            <div className={`status-badge ${appStatus ? 'approved' : 'pending'}`}>
-              <span className="status-badge-icon">{appStatus ? "🏆" : "🔒"}</span>
-              <span className="status-badge-text">
-                STATUS: {appStatus ? "Aprovado para um primeiro encontro em São Paulo!" : "Aguardando aceitação dos termos..."}
-              </span>
-            </div>
-          </div>
+          {(() => {
+            const checkedCount = [appDogs, appFood, appSelect, appWalk, appWhatever].filter(Boolean).length;
+            let statusText = "Aprovado com Flexibilidade Máxima! 🌟";
+            let statusIcon = "🌟";
+            if (checkedCount === 5) {
+              statusText = "Super Aprovado com Louvor! 🏆";
+              statusIcon = "🏆";
+            } else if (checkedCount > 0) {
+              statusText = `Aprovado! (${checkedCount}/5 Termos Alinhados) 🤝`;
+              statusIcon = "🤝";
+            }
+
+            return (
+              <div className="status-badge-wrap">
+                <div className="status-badge approved">
+                  <span className="status-badge-icon">{statusIcon}</span>
+                  <span className="status-badge-text">
+                    STATUS: {statusText}
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
 
           <div style={{ marginTop: '2rem' }}>
             <button
