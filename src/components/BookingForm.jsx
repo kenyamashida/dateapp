@@ -371,20 +371,32 @@ export default function BookingForm({ onSuccess, onBack }) {
       const endStr = `${selectedDate.replace(/-/g, '')}T${String(selectedSlot.hour + 2).padStart(2, '0')}0000`;
 
       // Build event description
-      let descriptionText = `${GUEST_NAME || 'Você'} disse sim! 🎉 Esse momento foi marcado com muito carinho.\\n\\n`;
+      let descriptionText = `${GUEST_NAME || 'Você'} aceitou o convite! 🎉 Encontro marcado com sucesso.\\n\\n`;
       descriptionText += `✨ PROGRAMAÇÃO ESCOLHIDA:\\n`;
       descriptionText += `• Tipo de encontro: ${formattedActivity}\\n`;
       descriptionText += `• Detalhes: ${chosenDetails}\\n\\n`;
-      descriptionText += `📋 PERGUNTAS FINAIS:\\n`;
-      descriptionText += `• Intenção: ${quizIntencao}\\n`;
-      descriptionText += `• Nível de aventura: ${quizAventura}\\n`;
-      descriptionText += `• Filme do Encontro: ${quizFilme}\\n`;
-      descriptionText += `• Dividir sobremesa: ${quizSobremesa}\\n`;
-      descriptionText += `• Mood ideal: ${quizMood}\\n`;
-      descriptionText += `• Trilha Sonora sugerida: ${quizTrilha.trim() || 'Sem som específico 🎵'}\\n`;
-      descriptionText += `• Restrições/Alergias: ${quizRestricao.trim() || 'Nenhuma restrição alimentar! 🌱'}\\n\\n`;
+      
+      let quizText = '';
+      if (quizIntencao) quizText += `• O que procura: ${quizIntencao}\\n`;
+      if (quizAventura) quizText += `• Nível de aventura: ${quizAventura}\\n`;
+      if (quizFilme) quizText += `• Filme do Encontro: ${quizFilme}\\n`;
+      if (quizSobremesa) quizText += `• Dividir sobremesa: ${quizSobremesa}\\n`;
+      if (quizMood) quizText += `• Mood ideal: ${quizMood}\\n`;
+      if (quizTrilha.trim()) quizText += `• Trilha Sonora sugerida: ${quizTrilha.trim()}\\n`;
+      if (quizRestricao.trim()) quizText += `• Restrições/Alergias: ${quizRestricao.trim()}\\n`;
+
+      if (quizText) {
+        descriptionText += `📋 PERGUNTAS FINAIS:\\n${quizText}\\n`;
+      }
+      
       descriptionText += `🚗 LOGÍSTICA:\\n• ${meetingType === 'busco' ? `Te busco em casa: ${address} 🚗` : `Nos encontramos lá! 🚶‍♂️`}\\n\\n`;
-      descriptionText += `🏆 CRITÉRIOS DE APROVAÇÃO: Todos aceitos! 🏅`;
+
+      const checkedCount = [appDogs, appFood, appSelect, appWalk, appWhatever].filter(Boolean).length;
+      let statusText = "Aprovado com Flexibilidade Máxima! 🌟";
+      if (checkedCount === 5) statusText = "Super Aprovado com Louvor! 🏆";
+      else if (checkedCount > 0) statusText = `Aprovado! (${checkedCount}/5 Termos Alinhados) 🤝`;
+
+      descriptionText += `🏆 CRITÉRIOS DE APROVAÇÃO: ${statusText}`;
 
       const eventTitle = `💕 Encontro Especial: Ken & ${GUEST_NAME || 'Parceira'} - ${formattedActivity.split(' ')[0]}`;
 
@@ -392,21 +404,32 @@ export default function BookingForm({ onSuccess, onBack }) {
       const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(descriptionText)}&ctz=America/Sao_Paulo`;
 
       // WhatsApp Message URL
-      let whatsappMessage = `Oi amor! É a ${GUEST_NAME || 'sua parceira'}. Aceitei seu convite para o nosso encontro dos sonhos! 🥰\n\n`;
+      let whatsappMessage = `Oi! Aqui é a ${GUEST_NAME || 'sua parceira'}. Aceitei seu convite para o nosso encontro! 🥰\n\n`;
       whatsappMessage += `📅 QUANDO: ${formatDateDisplay(selectedDate)} às ${selectedSlot.label}\n`;
       whatsappMessage += `🎯 O QUE VAMOS FAZER: ${formattedActivity} (${chosenDetails})\n`;
       whatsappMessage += `🚗 LOGÍSTICA: ${meetingType === 'busco' ? `Você me busca no endereço: ${address} 🚗` : `Nos encontramos lá! 🚶‍♂️`}\n\n`;
-      whatsappMessage += `📋 MEU PERFIL DO DATE:\n`;
-      whatsappMessage += `• Minha Intenção: ${quizIntencao}\n`;
-      whatsappMessage += `• Nível de Aventura: ${quizAventura}\n`;
-      whatsappMessage += `• Gênero de Filme: ${quizFilme}\n`;
-      whatsappMessage += `• Dividir Sobremesa: ${quizSobremesa}\n`;
-      whatsappMessage += `• Mood do Date: ${quizMood}\n`;
-      whatsappMessage += `• Playlist/Som: ${quizTrilha.trim() || 'Sem preferência de som! 🎵'}\n`;
-      whatsappMessage += `• Alergia/Restrição: ${quizRestricao.trim() || 'Nenhuma restrição! 🌱'}\n\n`;
+      
+      let quizWaText = '';
+      if (quizIntencao) quizWaText += `• O que procuro: ${quizIntencao}\n`;
+      if (quizAventura) quizWaText += `• Nível de Aventura: ${quizAventura}\n`;
+      if (quizFilme) quizWaText += `• Gênero de Filme: ${quizFilme}\n`;
+      if (quizSobremesa) quizWaText += `• Dividir Sobremesa: ${quizSobremesa}\n`;
+      if (quizMood) quizWaText += `• Mood do Date: ${quizMood}\n`;
+      if (quizTrilha.trim()) quizWaText += `• Playlist/Som: ${quizTrilha.trim()}\n`;
+      if (quizRestricao.trim()) quizWaText += `• Alergia/Restrição: ${quizRestricao.trim()}\n`;
+
+      if (quizWaText) {
+        whatsappMessage += `📋 MEU PERFIL DO DATE:\n${quizWaText}\n`;
+      }
+      
+      const waCheckedCount = [appDogs, appFood, appSelect, appWalk, appWhatever].filter(Boolean).length;
+      let waStatusText = "Aprovado com Flexibilidade Máxima! 🌟";
+      if (waCheckedCount === 5) waStatusText = "Super Aprovado com Louvor! 🏆";
+      else if (waCheckedCount > 0) waStatusText = `Aprovado! (${waCheckedCount}/5 Termos Alinhados) 🤝`;
+
       whatsappMessage += `✅ TERMOS DE APROVAÇÃO: Todos os critérios foram cumpridos e aceitos! 🐕🍕⏱️🚶‍♀️🚫\n`;
-      whatsappMessage += `🏆 STATUS: Aprovado para um primeiro encontro em São Paulo!\n\n`;
-      whatsappMessage += `Mal posso esperar! Mal vejo a hora de estarmos juntos! 💖`;
+      whatsappMessage += `🏆 STATUS: ${waStatusText}\n\n`;
+      whatsappMessage += `Até lá! Mal posso esperar! 💖`;
 
       const formattedPhone = OWNER_PHONE ? OWNER_PHONE.replace(/\D/g, '') : '';
       const whatsappUrl = formattedPhone 
