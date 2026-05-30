@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const OWNER_EMAIL = import.meta.env.VITE_OWNER_EMAIL;
 const OWNER_PHONE = import.meta.env.VITE_OWNER_PHONE;
-const GUEST_NAME = import.meta.env.VITE_GUEST_NAME || new URLSearchParams(window.location.search).get('name') || '';
+const GUEST_NAME = new URLSearchParams(window.location.search).get('name') || import.meta.env.VITE_GUEST_NAME || '';
 
 // ── Slot generation ────────────────────────────────────────────────────────────
 function generateSlots(startHour = 9, endHour = 21, durationH = 2) {

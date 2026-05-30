@@ -27,8 +27,8 @@ export default function QuestionCard({ onYes }) {
   const ghostRef    = useRef(null);
   const initialized = useRef(false);
 
-  // Read VITE_GUEST_NAME from environment or "name" query parameter from URL (e.g. ?name=Carol)
-  const name = import.meta.env.VITE_GUEST_NAME || new URLSearchParams(window.location.search).get('name') || '';
+  // Read "name" query parameter from URL (high priority) or fallback to VITE_GUEST_NAME environment variable
+  const name = new URLSearchParams(window.location.search).get('name') || import.meta.env.VITE_GUEST_NAME || '';
 
   const playChime = () => {
     try {
