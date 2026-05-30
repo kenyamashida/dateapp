@@ -81,28 +81,70 @@ export default function SuccessScreen({ result }) {
                 <span className="event-card-label">Logística</span>
                 <span className="event-card-value">{planDetails.meetingText}</span>
               </div>
+              {planDetails.quizAnswers && (
+                <>
+                  <div className="event-card-row">
+                    <span className="event-card-icon">🎭</span>
+                    <span className="event-card-label">Perfil</span>
+                    <span className="event-card-value">
+                      Intenção: {planDetails.quizAnswers.quizIntencao} | Aventura: {planDetails.quizAnswers.quizAventura}
+                    </span>
+                  </div>
+                  <div className="event-card-row">
+                    <span className="event-card-icon">🍿</span>
+                    <span className="event-card-label">Filme/Doce</span>
+                    <span className="event-card-value">
+                      Filme: {planDetails.quizAnswers.quizFilme} | Sobremesa: {planDetails.quizAnswers.quizSobremesa}
+                    </span>
+                  </div>
+                  {planDetails.quizAnswers.quizRestricao.trim() && (
+                    <div className="event-card-row">
+                      <span className="event-card-icon">🍎</span>
+                      <span className="event-card-label">Restrições</span>
+                      <span className="event-card-value">{planDetails.quizAnswers.quizRestricao}</span>
+                    </div>
+                  )}
+                </>
+              )}
             </>
           )}
 
           <div className="event-card-row">
-            <span className="event-card-icon">🔔</span>
-            <span className="event-card-label">Lembrete</span>
-            <span className="event-card-value">Enviado por e-mail & adicionado na agenda</span>
+            <span className="event-card-icon">🏅</span>
+            <span className="event-card-label">Status</span>
+            <span className="event-card-value" style={{ color: '#00e676', fontWeight: 'bold' }}>
+              Aprovado para um primeiro encontro em São Paulo! 🏆
+            </span>
           </div>
         </div>
 
-        {htmlLink && (
-          <a
-            id="btn-open-calendar"
-            className="btn-calendar-link"
-            href={htmlLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ width: '100%', justifyContent: 'center' }}
-          >
-            📅 Abrir no Google Agenda
-          </a>
-        )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
+          {htmlLink && (
+            <a
+              id="btn-open-calendar"
+              className="btn-calendar-link"
+              href={htmlLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              📅 Adicionar ao Google Agenda
+            </a>
+          )}
+
+          {result?.whatsappUrl && (
+            <a
+              id="btn-confirm-whatsapp"
+              className="btn-whatsapp-link"
+              href={result.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              💬 Confirmar no WhatsApp
+            </a>
+          )}
+        </div>
       </div>
     </>
   );
