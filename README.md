@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 💕 DateApp — O Convite Interativo para o Date Perfeito
 
@@ -310,4 +310,3 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 **Se este projeto te inspirou, deixe uma ⭐ no repositório!**
 
 </div>
-]]>
