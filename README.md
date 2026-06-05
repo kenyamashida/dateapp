@@ -299,7 +299,7 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 ## 👨‍💻 Autor
 
-**Kenya Mashida** — [GitHub](https://github.com/kenyamashida)
+**Ken Yamashida** — [GitHub](https://github.com/kenyamashida)
 
 ---
 
