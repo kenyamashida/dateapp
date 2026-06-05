@@ -439,8 +439,8 @@ export default function BookingForm({ onSuccess, onBack }) {
 
       const formattedPhone = OWNER_PHONE ? OWNER_PHONE.replace(/\D/g, '') : '';
       const whatsappUrl = formattedPhone 
-        ? `https://api.whatsapp.com/send?phone=${formattedPhone}&text=${encodeURIComponent(whatsappMessage)}`
-        : `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+        ? `https://wa.me/${formattedPhone}?text=${encodeURIComponent(whatsappMessage)}`
+        : `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
 
       // Enviar e-mail de notificação automático via FormSubmit
       if (OWNER_EMAIL && !OWNER_EMAIL.includes('seu-email')) {
